@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { User } from "./config.js";
-import { buildUserClients } from "./accounts.js";
+import { buildUserClients, registerAccountTools } from "./accounts.js";
 import { registerCalendarTools } from "./tools/calendar.js";
 
 export function buildMcpServer(user: User): McpServer {
@@ -13,6 +13,7 @@ export function buildMcpServer(user: User): McpServer {
     { name: "calendar-mcp", version: "1.0.0" },
     { instructions: "Tools to manage Google Calendar: list events, create/update/delete events, respond to invites, check free/busy. " + accountsHint },
   );
+  registerAccountTools(server, clients);
   registerCalendarTools(server, clients);
   return server;
 }
